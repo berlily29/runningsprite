@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+#game {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-image: url(png/background.jpg);
+    background-repeat: repeat-x;
+    background-size: cover;
+}
+
+#controls {
+    display: flex;
+    align-items: center;
+    width: 40vw;
+    height: 20vh;
+}
+
+.buttons {
+    height: 20%;
+    width: 40%;
+    margin: 4px;
+}
+
+#ninja {
+    position: absolute;
+    height: 150px;
+    width: 100px;
+    top: 550px;
+    left: 50px;
+    opacity: 1;
+    transition: .5s top;
+}
+
+#paused {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    font-size: 5em;
+    opacity: .8;
+}

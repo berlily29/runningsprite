@@ -1,0 +1,182 @@
+var game = document.getElementById('game');
+var x = -10;
+var ninja = document.getElementById('ninja');
+var gamefocus = document.getElementById('container');
+var pausesplash = document.getElementById('paused');
+var start;
+var pause;
+var running;
+var jumping;
+var sliding;
+var keydown = false;
+//var property = window.getComputedStyle(game); // FOR EMERGENCY
+
+async function runanimation() {
+
+    pausesplash.style.opacity = '0';
+    ninja.style.opacity = '1';
+    ninja.style.top = '550px';
+
+    start = setInterval(() => {
+    var loopbg = x + 'px';
+    game.style.backgroundPositionX = loopbg;
+    x += -40;
+
+    }, 50);
+
+    var run = 0;
+    running  = setInterval(() => {
+        var url = 'png/Run__00'+ run +'.png';
+        ninja.style.width = '150px';
+        ninja.style.height = '150px';
+
+        ninja.src =url;
+        run +=1;
+        if (run == 9) run = 0;
+    }, 100);
+}
+
+async function jumpanimation() {
+
+    start = setInterval(() => {
+        var loopbg = x + 'px';
+        game.style.backgroundPositionX = loopbg;
+        x += -40;
+        }, 50);
+
+    
+    var jump = 0;    
+    
+    
+    jumping  = setInterval(() => {
+        var url = 'png/Jump__00'+ jump +'.png';
+        ninja.style.width = '150px';
+        ninja.style.height = '150px';
+
+        ninja.src=url;
+        jump +=1;
+        ninja.style.top = '450px';
+
+        if (jump == 9) {
+            clearInterval(jumping)
+            clearInterval(running);
+            clearInterval(start); 
+            keydown = false;
+            runanimation();
+        };
+        }, 100);
+        
+}
+
+async function slideanimation() {
+
+    start = setInterval(() => {
+        var loopbg = x + 'px';
+        game.style.backgroundPositionX = loopbg;
+        x += -40;
+        }, 50);
+
+    
+    var slide = 1;    
+
+    sliding  = setInterval(() => {
+        var url = 'png/Slide__00'+ slide +'.png';
+        ninja.style.width = '150px';
+        ninja.style.height = '130px';
+
+        ninja.src=url;
+        slide +=1;
+        ninja.style.top = '600px';
+
+
+        if (slide == 9) {
+            clearInterval(sliding)
+            clearInterval(running);
+            clearInterval(start); 
+            keydown = false;
+            runanimation();
+        };
+        }, 100);
+        
+}
+
+async function paused() {
+    game.style.backgroundPositionX = x + 'px';
+    var idle = 0;
+    pausesplash.style.opacity = '.8';
+    ninja.style.opacity = '.6';
+    pause = setInterval(() => {
+            var url = 'png/Idle__00'+ idle +'.png';
+            ninja.style.width = '100px';
+            ninja.src= url;
+            idle += 1;
+            if (idle == 9) idle = 0;
+    }, 100);
+
+}
+var pausecheck = false;
+
+function controls() {
+
+document.addEventListener('keyup', event => {
+    if (event.code == 'Enter' && ) {
+        clearInterval(start);
+        clearInterval(pause);
+        clearInterval(running);
+        clearInterval(jumping);
+        clearInterval(sliding);
+        keydown = true;
+
+        pausecheck = false;
+        runanimation(); 
+
+    }
+    else if (event.code == 'KeyP' ) {
+
+        if (pausecheck == false && keydown == false) {
+        clearInterval(start);
+        clearInterval(running);
+        clearInterval(pause);
+        clearInterval(jumping);
+        clearInterval(sliding);
+
+        keydown = true;
+        pausecheck = true;
+        paused();
+        }
+        else return;
+    }
+    else if (event.code == 'KeyW') {
+
+        if (pausecheck == false && keydown == false) {
+        clearInterval(start);
+        clearInterval(running);
+        clearInterval(pause);
+        clearInterval(jumping);
+        clearInterval(sliding);
+
+       keydown = true;
+       jumpanimation(); 
+    } else return;
+    }
+
+    else if (event.code == 'KeyS' ) {
+
+        if (pausecheck == false && keydown == false) {
+        clearInterval(start);
+        clearInterval(running);
+        clearInterval(pause);
+        clearInterval(jumping);
+        clearInterval(sliding);
+        
+        keydown = true;
+        slideanimation(); 
+    } else return;
+     }
+
+
+  }
+
+  );
+}
+controls()
